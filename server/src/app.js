@@ -10,12 +10,12 @@ const launchesRouter = require("./routes/launches/launches.router");
 const app = express();
 
 app.use(cors({
-  origin:'http://localhost:3000'
+  origin:['http://localhost:5000','http://localhost:3000'],
 }));
 app.use(morgan('combined'));
 
-app.use(express.json());
-app.use(express.static(path.join(__dirname,'..', 'public', 'index.html')));
+app.use(express.json()); 
+app.use(express.static(path.join(__dirname,'..', 'public')));
 app.use('/planets',planetsRouter);
 app.use('/launches',launchesRouter);
 
