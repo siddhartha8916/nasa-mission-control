@@ -12,7 +12,7 @@ const launchesSchema = new mongoose.Schema({
   //   type:mongoose.ObjectId,
   //   ref:'Planet'
   // },
-  target: { type: String, required: true },
+  target: { type: String },
   customers: [String],
   upcoming: { type: Boolean, required: true },
   success: { type: Boolean, required: true, default: true },

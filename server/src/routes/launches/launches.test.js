@@ -1,28 +1,30 @@
 const request = require("supertest");
 
 const app = require("../../app");
-const { mongoConnect, mongoDisconnect } = require("../../services/mongo-database.service");
+const {
+  mongoConnect,
+  mongoDisconnect,
+} = require("../../services/mongo-database.service");
 
 describe("Testing Launches API", () => {
-
-  beforeAll(async()=>{
+  beforeAll(async () => {
     await mongoConnect();
-  })
+  });
 
-  afterAll(async()=>{
-    await mongoDisconnect()
-  })
+  afterAll(async () => {
+    await mongoDisconnect();
+  });
 
-  describe("Test GET /launches", () => {
+  describe("Test GET /v1/launches", () => {
     test("It should respond with 200 success.", async () => {
       const response = await request(app)
-        .get("/launches")
+        .get("/v1/launches")
         .expect("Content-Type", /json/)
         .expect(200);
     });
   });
 
-  describe("Test POST /launches", () => {
+  describe("Test POST /v1/launches", () => {
     const completeLaunchData = {
       mission: "Kepler Exploration X",
       rocket: "Explorer IS1",
@@ -45,7 +47,7 @@ describe("Testing Launches API", () => {
 
     test("It should respond with 201 success", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(completeLaunchData)
         .expect("Content-Type", /json/)
         .expect(201);
@@ -60,7 +62,7 @@ describe("Testing Launches API", () => {
 
     test("It should catch missing required property", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(launchDatawithoutDate)
         .expect("Content-Type", /json/)
         .expect(400);
@@ -72,7 +74,7 @@ describe("Testing Launches API", () => {
 
     test("It should catch invalid dates", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(launchDataWithInvalidDate)
         .expect("Content-Type", /json/)
         .expect(400);
@@ -82,5 +84,4 @@ describe("Testing Launches API", () => {
       });
     });
   });
-  
 });

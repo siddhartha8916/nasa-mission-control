@@ -1,8 +1,11 @@
 const { getAllLaunches, addNewLaunch, deleteLaunch, existsLaunchWithId, abortLaunchById, scheduleNewLaunch } = require("../../models/launches.model");
+const { getPagination } = require("../../services/query.service");
 
 async function httpGetAllLaunches(req, res) {
   // return res.status(200).json(Object.fromEntries(launches));  // Transform to Object
-  return res.status(200).json(await getAllLaunches()); //Transform to Array
+  const {skip, limit} = getPagination(req.query)
+  const launches = await getAllLaunches(skip,limit)
+  return res.status(200).json(launches); //Transform to Array
 }
 
 async function httpCreateLaunch(req, res) {

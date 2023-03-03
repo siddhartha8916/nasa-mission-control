@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const MONGO_URL = 'mongodb+srv://siddhartha6916:OffPWKN5xhGfytYW@nasa-project.a021j1s.mongodb.net/nasa-db?retryWrites=true&w=majority'
+const MONGO_URL = process.env.MONGO_URL
 
 const options = {
   autoIndex: false, // Don't build indexes
