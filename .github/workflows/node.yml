@@ -19,6 +19,3 @@ jobs:
         node-version: ${{ matrix.node-version }}
     -run: npm run install-dependencies
     -run: npm run build --prefix client
-  # To set deploy job needs to run after build succeeds
-  # deploy: 
-  #   needs: build 
